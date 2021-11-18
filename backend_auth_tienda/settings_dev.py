@@ -24,10 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%evv5%^0vhkjga_*wjr2iq0-f_8k$$9_l5!yxe5w!!_1!3qlg6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG          = True
+ALLOWED_HOSTS  = []
 
-ALLOWED_HOSTS          = []
-CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -41,14 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'auth_example',
     'rest_framework',
-    'corsheaders'
 ]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_TIMELIFE'   : timedelta(minutes = 15),
     'REFRESH_TOKEN_TIMELIFE'  : timedelta(days = 1),
     'ROTATE_REFRESH_TOKENS'   : False,
-    'BLACKLIST_AFTER_ROTATION': True,
+    'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN'       : False,
     'ALGORITHM'               :'HS256',
     'USER_ID_FIELD'           :'id',
@@ -64,19 +62,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
-REST_FRAMEWORK={
-    'DEFAULT_PERMISSION_CLASSES':(
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAutentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
 
-
+AUTH_USER_MODEL = 'auth_example.User'
 ROOT_URLCONF = 'backend_auth_tienda.urls'
 
 TEMPLATES = [
@@ -103,8 +100,12 @@ WSGI_APPLICATION = 'backend_auth_tienda.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE'  : 'django.db.backends.postgresql_psycopg2',
+        'NAME'    : 'auth_ms',
+        'USER'    : 'postgres',
+        'PASSWORD': 'Lina920713',
+        'HOST'    : 'localhost',
+        'PORT'    : '5432'
     }
 }
 
