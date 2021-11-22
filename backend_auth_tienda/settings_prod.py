@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
-from datetime import timedelta
+from   pathlib import Path
+from   datetime import timedelta
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%evv5%^0vhkjga_*wjr2iq0-f_8k$$9_l5!yxe5w!!_1!3qlg6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG          = True
+DEBUG          = False
 ALLOWED_HOSTS  = []
 
 
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'auth_example',
     'rest_framework',
     'drf_spectacular',
-    'drf_spectacular_sidecar',
+
 ]
 
 SPECTACULAR_SETTINGS = {
@@ -114,10 +115,10 @@ WSGI_APPLICATION = 'backend_auth_tienda.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE'  : 'django.db.backends.postgresql_psycopg2',
-        'NAME'    : 'auth_ms',
-        'USER'    : 'postgres',
-        'PASSWORD': 'Lina920713',
-        'HOST'    : 'localhost',
+        'NAME'    : 'd65k41rv009ijt',
+        'USER'    : 'blpgaubuwbvrif',
+        'PASSWORD': 'd3e301f798ed9b5810ee5e293575b85b00d28b46c029a11314281039b33542d1',
+        'HOST'    : 'ec2-52-201-195-11.compute-1.amazonaws.com',
         'PORT'    : '5432'
     }
 }
@@ -165,3 +166,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+django_heroku.settings(locals())
